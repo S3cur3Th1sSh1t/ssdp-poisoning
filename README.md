@@ -61,14 +61,16 @@ optional arguments:
   -r REALM, --realm REALM
                         Realm to appear when prompting users for
                         authentication via base64 auth.
-  -u URL, --url URL     Add javascript to the template to redirect from the
-                        phishing page to the provided URL.
+  -u URL, --url URL     Redirect to this URL (ex: '-u http://google.com').
+                        Works with templates that do a POST for logon forms
+                        and with templates including the custom redirect
+                        JavaScript (see README for more info)
 ```
 
 # Templates
 The following templates come with the tool. If you have good design skills, please contribute one of your own!
 
-- `office365`:          Will show up in Windows Explorer as "Office365 Backups". Phishing page looking like Office365 logon will POST credentials back. These will be flagged in the UI and logged in the log file. Will redirect back to the phishing page after POST. Future improvement might be to redirect to actual Office365. Developer: [pentestgeek](https://github.com/pentestgeek/phishing-frenzy-templates).
+- `office365`:          Will show up in Windows Explorer as "Office365 Backups". Phishing page looking like Office365 logon will POST credentials back to you. These will be flagged in the UI and logged in the log file. Recommend to run with '-u https://www.office.com' to redirect users to the legit site after stealing their credentials. Developer: [pentestgeek](https://github.com/pentestgeek/phishing-frenzy-templates).
 - `microsft-azure`:     Will appear in Windows Explorer as "Microsoft Azure Storage". Landing page is the Windows Live login page when cookies are disabled. Recommend to use with the -u option to redirect users to real login page. Developer: [Dwight Hohnstein](https://github.com/djhohnstein).
 - `bitcoin`:            Will show up in Windows Explorer as "Bitcoin Wallet". Phishing page is just a random set of Bitcoin private/public/address info. There are no actual funds in these accounts.
 - `password-vault`:     Will show up in Windows Explorer as "IT Password Vault". Phishing page contains a short list of fake passwords / ssh keys / etc.
@@ -97,8 +99,9 @@ In your phishing page (`present.html`), use variables like the following for add
     </script>
 
 
-# If using an HTTP form to capture clear-text credentials, use code like the following. The tool will monitor
-# POSTs to this URL for credentials:
+# If using an HTTP form to capture clear-text credentials, use code like the following. Also any template doing a
+# POST request will automatically support the '-u' parameter to redirect after the POST completes.  The tool will
+# monitor POSTs to this URL for credentials:
 <form method="POST" action="/ssdp/do_login.html" name="LoginForm" autocomplete="off">
 ```
 
