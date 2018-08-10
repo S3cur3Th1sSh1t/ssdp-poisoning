@@ -59,9 +59,9 @@ parser.add_argument('-b', '--basic', default=False, action="store_true", help="E
                     templates and write credentials to creds.txt")
 parser.add_argument("-r", "--realm", type=str, default="Microsoft Corporation", help="Realm to appear when prompting \
                     users for authentication via base64 auth.", action="store")
-parser.add_argument("-u", "--url", type=str, default="", help="Redirect to this URL (ex: '-u http://google.com') \
+parser.add_argument("-u", "--url", type=str, default="", help="Redirect to this URL (ex: '-u http://google.com'). \
                     Works with templates that do a POST for logon forms and with templates including the custom \
-                    redirect JavaScript (see README for more info)", action="store")
+                    redirect JavaScript (see README for more info).", action="store")
 args = parser.parse_args()
 
 charWhitelist = re.compile('[^a-zA-Z0-9 ._-]')        # Defining a list of expected characters for a network device 

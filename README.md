@@ -64,7 +64,7 @@ optional arguments:
   -u URL, --url URL     Redirect to this URL (ex: '-u http://google.com').
                         Works with templates that do a POST for logon forms
                         and with templates including the custom redirect
-                        JavaScript (see README for more info)
+                        JavaScript (see README for more info).
 ```
 
 # Templates
